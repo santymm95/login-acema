@@ -15,6 +15,7 @@ header("Refresh: 3; URL=dashboard.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Bienvenido - ACEMA</title>
@@ -42,23 +43,35 @@ header("Refresh: 3; URL=dashboard.php");
         }
 
         .loader {
-            border: 10px solid #f3f3f3;
-            border-top: 10px solid #3498db;
+            margin: 20px auto;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1.5s linear infinite;
+            background: conic-gradient(#215ba0 0deg, #40a335 120deg, #215ba0 240deg, #40a335 360deg);
+            animation: spin 1s linear infinite;
+            mask:
+                radial-gradient(farthest-side, transparent calc(100% - 8px), black calc(100% - 8px));
+            -webkit-mask:
+                radial-gradient(farthest-side, transparent calc(100% - 8px), black calc(100% - 8px));
         }
 
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <h2>Bienvenido, <?php echo htmlspecialchars($nombre . ' ' . $apellido); ?></h2>
     <p>Redirigiendo a tu panel de principal...</p>
     <div class="loader"></div>
 </body>
+
 </html>
