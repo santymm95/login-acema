@@ -164,18 +164,22 @@
   }
 
   i{
-    padding: 3px;
+    margin-right: 3px;
   }
   
   /* Responsive */
   @media (max-width: 600px) {
     .navbar-modern {
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
       height: auto;
       padding: 15px 20px;
-      align-items: flex-start;
-      gap: 10px;
+    
+ 
     }
+
+    
   
     .sidebar {
       width: 100%;
@@ -193,7 +197,7 @@
       padding: 10px;
     }
   
-    .navbar-logo img {
+    .user-name{
       display: none;
     }
   
