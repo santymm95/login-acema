@@ -1,0 +1,181 @@
+/* -------------------- Global -------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f4f7fc;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-image: url("../images/photo2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* -------------------- Estructura Principal -------------------- */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* -------------------- Login Box -------------------- */
+.login-box {
+  background: rgba(255, 255, 255, 0.21);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.6px);
+  -webkit-backdrop-filter: blur(5.6px);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  color: #f7f7f7;
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* -------------------- Inputs -------------------- */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px 10px 12px 30px;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  background: transparent;
+  border-radius: 8px;
+  color: #1b0e69;
+  font-size: 16px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #00234f;
+}
+
+/* -------------------- Botones -------------------- */
+.button-group button {
+  width: 100%;
+  padding: 12px;
+  background-color: #215ba0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+  background-color: #184a7b;
+}
+
+/* -------------------- Enlaces / Registro -------------------- */
+.register-option {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.register-option a {
+  color: #215ba0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-option a:hover {
+  text-decoration: underline;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.21);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.6px);
+  -webkit-backdrop-filter: blur(5.6px);
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  padding: 10px;
+  border: 1px solid #c3e6cb;
+  margin: 15px auto;
+  border-radius: 5px;
+  text-align: center;
+  width: 80%;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  margin: 15px auto;
+  border-radius: 5px;
+  text-align: center;
+  width: 80%;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+/* -------------------- Responsive -------------------- */
+@media screen and (max-width: 768px) {
+  .login-box {
+    margin: auto;
+    width: 90%;
+    padding: 30px;
+  }
+
+  .input-group input,
+  .input-group select {
+    font-size: 14px;
+  }
+
+  .button-group button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

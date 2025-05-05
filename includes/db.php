@@ -1,7 +1,7 @@
 <?php
 // Configuración de la base de datos
 $host = 'localhost';      // El host de la base de datos (puede ser localhost o una IP)
-$dbname = 'acema';        // Nombre de la base de datos
+$dbname = 'acema_db';        // Nombre de la base de datos
 $username = 'root';       // Nombre de usuario para acceder a la base de datos (por defecto en XAMPP es 'root')
 $password = '';           // Contraseña para acceder a la base de datos (en XAMPP por defecto es vacío)
 

@@ -92,6 +92,12 @@ html, body {
   margin-bottom: 20px;
 }
 
+h2{
+  color: #f7f7f7;
+  font-size: 2rem;
+  text-align: center;
+}
+
 /* -------------------- Text Overlay -------------------- */
 .text-overlay {
   display: flex;
@@ -174,6 +180,7 @@ h2 strong{
   border: none;
   border-bottom: 2px solid #ffffff;
   background: transparent;
+  border-radius: 8px;
   color: #1b0e69;
   font-size: 16px;
   outline: none;
@@ -209,6 +216,20 @@ input::placeholder {
 .register-option a:hover {
   text-decoration: underline;
 }
+
+ 
+.alert.success {
+ 
+  color: #1f7b22;
+}
+
+.alert.error {
+ font-weight: bold;
+  color: rgb(238, 56, 56);
+}
+
+
+
 
 /* -------------------- Responsive -------------------- */
 @media screen and (max-width: 768px) {

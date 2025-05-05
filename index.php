@@ -1,6 +1,59 @@
+<?php
+session_start();
+
+// Conexión a la base de datos
+$host = 'localhost';
+$dbname = 'acema_db';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->exec("SET NAMES 'utf8'");
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
+}
+
+// Procesar el inicio de sesión
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+
+    // Validación simple del correo
+    if (empty($email) || empty($password)) {
+        $_SESSION['error'] = "Por favor, ingresa todos los campos.";
+    } else {
+        // Consultar si el usuario existe
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch();
+
+        // Verificar la contraseña
+        if ($user && password_verify($password, $user['password'])) {
+            // Iniciar sesión y guardar los datos del usuario
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'email' => $user['email'],
+                'role' => $user['role']
+            ];
+            // Redirigir a la página dashboard
+            header("Location: ./views/loading_dashboard.php");
+
+            exit;
+        } else {
+            // Si el usuario o la contraseña son incorrectos
+            $_SESSION['error'] = "Correo o contraseña incorrectos🤨"; // Mensaje de error
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +61,6 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
     <div class="container">
         <!-- Columna izquierda con información -->
@@ -18,9 +70,8 @@
                     <h2 class="active">Bienvenido <br><strong>ACEMA ERP</strong></h2>
                     <h2>Sistema adaptado a dispositivos móviles.</h2>
                     <h2>Conexión directa, en tiempo real</h2>
-                    <h2>Datos relacionales para mayor facilidad de busqueda.</h2>
-                    <h6>Visita nuestra web<br><a href="https://acemaingenieria.com/"
-                            target="_blank">acemaingenieria.com</a></h6>
+                    <h2>Datos relacionales para mayor facilidad de búsqueda.</h2>
+                    <h6>Visita nuestra web<br><a href="https://acemaingenieria.com/" target="_blank">acemaingenieria.com</a></h6>
                 </div>
             </div>
         </div>
@@ -29,7 +80,18 @@
         <div class="right-column">
             <div class="login-box">
                 <h2>Iniciar sesión</h2>
-                <form action="login.php" method="POST">
+                
+                <!-- Mostrar mensaje de error si existe en la sesión -->
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert error">
+                        <?php 
+                            echo $_SESSION['error']; 
+                            unset($_SESSION['error']); // Limpiar el mensaje después de mostrarlo
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+                <form action="index.php" method="POST">
                     <div class="input-group">
                         <i class="fas fa-user"></i>
                         <input type="email" name="email" placeholder="Correo electrónico" required>
@@ -44,7 +106,7 @@
                     </div>
                 </form>
                 <div class="register-option">
-                    <p>¿No tienes cuenta? <a href="#">¡Regístrate aquí!</a></p>
+                    <p>¿No tienes cuenta? <a href="./views/register.php">¡Regístrate aquí!</a></p>
                 </div>
             </div>
         </div>
@@ -60,7 +122,7 @@
             texts[currentIndex].classList.add('active');
         }
 
-        setInterval(cycleTexts, 5000); // Cambio cada 5 segundos
+        setInterval(cycleTexts, 4000); // Cambio cada 4 segundos
 
         // Mostrar/ocultar contraseña
         const togglePassword = document.getElementById('toggle-password');
@@ -74,5 +136,4 @@
         });
     </script>
 </body>
-
 </html>
