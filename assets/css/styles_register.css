@@ -77,8 +77,8 @@ body {
   outline: none;
 }
 
-input::placeholder {
-  color: #00234f;
+.input-group input::placeholder {
+  color:#215ba0;
 }
 
 /* -------------------- Botones -------------------- */
@@ -107,7 +107,7 @@ input::placeholder {
 .register-option a {
   color: #215ba0;
   text-decoration: none;
-  font-weight: bold;
+  
 }
 
 .register-option a:hover {
@@ -146,6 +146,11 @@ input::placeholder {
   width: 80%;
 }
 
+option{
+  color: #215ba0;
+  
+}
+
 .error {
   color: #721c24;
   background-color: #f8d7da;
@@ -159,6 +164,7 @@ input::placeholder {
 
 input::placeholder {
   color: #999;
+  
 }
 
 /* -------------------- Responsive -------------------- */

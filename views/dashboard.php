@@ -27,13 +27,14 @@ if (!isset($_SESSION['user'])) {
   <div class="main-content">
     <div class="card">
       <h1>Bienvenido, <?php echo $_SESSION['user']['first_name']; ?></h1>
-      <p><strong>Dashboard principal.</strong> Explora el menú lateral para realizar acciones o crea tarjetas con accesos directos.</p>
+      <p><strong>Dashboard principal.</strong> Explora el menú lateral para realizar acciones o crea tarjetas con
+        accesos directos.</p>
     </div>
 
     <div class="shortcuts-container">
       <div class="shortcut-card" data-link="horas.php">
         <i class="fas fa-clock"></i>
-        <span>Horas</span>
+        <span>Asistencias</span>
       </div>
       <div class="shortcut-card" data-link="proyectos.php">
         <i class="fas fa-project-diagram"></i>
@@ -47,15 +48,50 @@ if (!isset($_SESSION['user'])) {
         <i class="fas fa-chart-line"></i>
         <span>Reportes</span>
       </div>
-      <div class="shortcut-card" data-link="admin.php">
-        <i class="fas fa-users-cog"></i>
+      <div class="shortcut-card" data-link="configuration.php">
+        <i class="fas fa-chart-line"></i>
         <span>Admin</span>
       </div>
+
+
+
+
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script>
+    document.querySelectorAll('.shortcut-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const link = card.getAttribute('data-link');
+        if (link) {
+          window.location.href = link;
+        }
+      });
+    });
+
+    window.addEventListener('load', () => {
+      // Mostrar el botón del asistente 3 segundos después
+      setTimeout(() => {
+        document.getElementById('asistente-boton').classList.add('mostrar');
+      }, 2000);
+    });
+
+    const asistenteBoton = document.getElementById('asistente-boton');
+    const asistentePopup = document.getElementById('asistente-popup');
+    const cerrarAsistente = document.getElementById('cerrar-asistente');
+
+    // Mostrar popup y ocultar botón
+    asistenteBoton.addEventListener('click', () => {
+      asistentePopup.classList.add('mostrar');
+      asistenteBoton.style.display = 'none';
+    });
+
+    // Cerrar popup y mostrar botón otra vez
+    cerrarAsistente.addEventListener('click', () => {
+      asistentePopup.classList.remove('mostrar');
+      asistenteBoton.style.display = 'flex';
+    });
     new Sortable(document.querySelector('.shortcuts-container'), {
       animation: 150,
       ghostClass: 'dragging-card'
