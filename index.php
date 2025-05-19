@@ -17,22 +17,18 @@ try {
 
 // Procesar el inicio de sesión
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = trim($_POST['email']);
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
 
-    // Validación simple del correo
     if (empty($email) || empty($password)) {
         $_SESSION['error'] = "Por favor, ingresa todos los campos.";
     } else {
-        // Consultar si el usuario existe
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $user = $stmt->fetch();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Verificar la contraseña
         if ($user && password_verify($password, $user['password'])) {
-            // Iniciar sesión y guardar los datos del usuario
             $_SESSION['user'] = [
                 'id' => $user['id'],
                 'first_name' => $user['first_name'],
@@ -40,13 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'email' => $user['email'],
                 'role' => $user['role']
             ];
-            // Redirigir a la página dashboard
             header("Location: ./views/loading_dashboard.php");
-
             exit;
         } else {
-            // Si el usuario o la contraseña son incorrectos
-            $_SESSION['error'] = "Correo o contraseña incorrectos🤨"; // Mensaje de error
+            $_SESSION['error'] = "Correo o contraseña incorrectos 🤨";
         }
     }
 }
@@ -80,13 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="right-column">
             <div class="login-box">
                 <h2>Iniciar sesión</h2>
-                
-                <!-- Mostrar mensaje de error si existe en la sesión -->
+
+                <!-- Mostrar mensaje de error si existe -->
                 <?php if (isset($_SESSION['error'])): ?>
                     <div class="alert error">
                         <?php 
                             echo $_SESSION['error']; 
-                            unset($_SESSION['error']); // Limpiar el mensaje después de mostrarlo
+                            unset($_SESSION['error']);
                         ?>
                     </div>
                 <?php endif; ?>

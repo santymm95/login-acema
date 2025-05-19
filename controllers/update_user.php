@@ -6,6 +6,9 @@ if (isset($_POST['update_user'])) {
     $lastName = $_POST['last_name'];
     $email = $_POST['email'];
     $role = $_POST['role'];
+    $documentNumber = $_POST['document_number'];
+    $project = $_POST['project'];
+    $enabled = isset($_POST['enabled']) ? 1 : 0;
 
     // Conexión a la base de datos
     $conn = new mysqli("localhost", "root", "", "acema_db");
@@ -19,20 +22,17 @@ if (isset($_POST['update_user'])) {
 
     if ($result->num_rows > 0) {
         // Correo duplicado
-        echo "<p style='color: red;'>El correo electrónico ya está en uso por otro usuario.</p>";
-        echo "<a href='../views/edit_user.php?id=$userId'>Volver</a>";
+        echo "<script>alert('El correo electrónico ya está en uso por otro usuario.'); window.location.href = '../views/edit_user.php?id=$userId';</script>";
     } else {
         // Actualizar datos del usuario
-        $sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, role_id = ? WHERE id = ?";
+        $sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, document_number = ?, role_id = ?, project_id = ?, enabled = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssi", $firstName, $lastName, $email, $role, $userId);
+        $stmt->bind_param("ssssiisi", $firstName, $lastName, $email, $documentNumber, $role, $project, $enabled, $userId);
 
         if ($stmt->execute()) {
-            header("Location: ../views/create_user.php?mensaje=actualizado");
-            exit();
+            echo "<script>alert('Usuario actualizado correctamente.'); window.location.href = '../views/create_user.php';</script>";
         } else {
-            echo "<p style='color: red;'>Hubo un error al actualizar el usuario.</p>";
-            echo "<a href='../views/edit_user.php?id=$userId'>Volver</a>";
+            echo "<script>alert('Hubo un error al actualizar el usuario.'); window.location.href = '../views/edit_user.php?id=$userId';</script>";
         }
 
         $stmt->close();
@@ -41,7 +41,7 @@ if (isset($_POST['update_user'])) {
     $conn->close();
 } else {
     // Acceso indebido
-    header("Location: ../views/usuarios.php");
+    echo "<script>window.location.href = '../views/usuarios.php';</script>";
     exit();
 }
 ?>

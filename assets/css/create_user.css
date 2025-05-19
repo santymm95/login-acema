@@ -1,174 +1,113 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* styles_register.css */
 
-/* Estilo base */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #f1f4f9, #dff1ff);
-  color: #333;
+  background: linear-gradient(135deg, #f0f2f5, #dfe6ed);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   min-height: 100vh;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.button-container{
+  margin-top: 50px;
+}
+
+.register-container {
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 60px auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5em;
+  color: #333;
+  font-size: 1.8em;
+}
+
+.register-form {
   display: flex;
   flex-direction: column;
+  gap: 1.2em;
 }
 
-/* Modo oscuro */
-body.dark-mode {
-  background: #121212;
-  color: #f1f1f1;
-}
-
-/* Container general */
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 5rem;
-  gap: 2rem;
-}
-
-/* Caja del formulario */
-.login-box {
-  flex: 1 1 350px;
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-}
-
-/* Modo oscuro: fondo y sombras */
-body.dark-mode .login-box {
-  background: #2c2c2c;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.login-box h2 {
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #003366;
-}
-
-/* Modo oscuro: color del título */
-body.dark-mode .login-box h2 {
-  color: #f1f1f1;
-}
-
-/* Grupos de entrada */
 .input-group {
   display: flex;
   align-items: center;
-  margin-bottom: 1.2rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 0.5rem;
   background-color: #f9f9f9;
+  padding: 0.5em;
+  transition: border-color 0.3s ease;
 }
 
-/* Modo oscuro: entrada */
-body.dark-mode .input-group {
-  background-color: #55555569;
-  border: 1px solid #777;
-}
-
-body.dark-mode .input-group:hover {
-  border: 1px solid #f1f1f1;
-}
-
-body.dark-mode.option-group:hover {
-  background-color: #444;
-  border: 1px solid #f1f1f1;
+.input-group:hover {
+  border-color: #007BFF;
 }
 
 .input-group i {
-  margin-right: 0.8rem;
-  color: #003366;
-}
-
-/* Modo oscuro: iconos */
-body.dark-mode .input-group i {
-  color: #f1f1f1;
+  margin-right: 0.75em;
+  color: #555;
+  min-width: 20px;
+  text-align: center;
 }
 
 .input-group input,
 .input-group select {
-  border: none;
-  outline: none;
   flex: 1;
+  padding: 0.6em;
+  border: none;
   background: transparent;
-  font-size: 1rem;
+  font-size: 1em;
+  outline: none;
+  color: #333;
 }
 
-/* Botón */
 .button-group {
   text-align: center;
-  margin-top: 1rem;
 }
 
 .button {
-  background-color: #003366;
-  color: #fff;
+  background-color: #007BFF;
+  color: white;
+  padding: 0.7em 2em;
   border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 1em;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-/* Modo oscuro: botón */
-body.dark-mode .button {
-  background-color: #0055aa;
-}
-
-/* Modo oscuro: hover botón */
-body.dark-mode .button:hover {
-  background-color: #003366;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #0055aa;
+  background-color: #0056b3;
 }
 
-/* Sección de tarjetas del usuario */
-.user-card-section {
-  flex: 1 1 300px;
-  max-width: 400px;
-}
-
-/* Modo oscuro: Sección de tarjetas */
-body.dark-mode .user-card-section {
-  background-color: #555;
-  color: #f1f1f1;
-}
-
-/* Adaptabilidad */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 600px) {
+  .register-container {
+    padding: 1.5em;
+    margin: 30px 10px;
   }
 
-  .login-box, .user-card-section {
-    max-width: 100%;
+  h2 {
+    font-size: 1.5em;
   }
 }
 
-/* Para pantallas pequeñas */
-@media (max-width: 480px) {
-  .input-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .input-group i {
-    margin-bottom: 0.5rem;
-  }
-
-  .button {
-    width: 100%;
-  }
-}

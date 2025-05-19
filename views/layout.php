@@ -1,9 +1,19 @@
 <?php
-if (!isset($_SESSION))
+// Corrección segura para evitar errores si ya se inició la sesión
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// Validar que el usuario haya iniciado sesión (opcional según seguridad deseada)
+if (!isset($_SESSION['user'])) {
+    echo "Acceso no autorizado.";
+    exit;
+}
+
 $first_name = $_SESSION['user']['first_name'] ?? '';
 $last_name = $_SESSION['user']['last_name'] ?? '';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -63,13 +73,11 @@ $last_name = $_SESSION['user']['last_name'] ?? '';
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="nav-item"><a href="dashboard.php"><i class="fas fa-home"></i><span> Inicio</span></a></div>
-        <div class="nav-item"><a href="horas.php"><i class="fas fa-clock"></i><span> Asistencias</span></a></div>
-        <div class="nav-item"><a href="proyectos.php"><i class="fas fa-folder-open"></i><span> Proyectos</span></a></div>
-        <div class="nav-item"><a href="solicitudes.php"><i class="fas fa-user-check"></i><span> Solicitudes</span></a></div>
-        <div class="nav-item"><a href="admin.php"><i class="fas fa-users-cog"></i><span> Admin</span></a></div>
-        <div class="nav-item"><a href="usuarios.php"><i class="fas fa-users"></i><span> Usuarios</span></a></div>
-        <div class="nav-item"><a href="reportes.php"><i class="fas fa-chart-line"></i><span> Reportes</span></a></div>
-        <div class="nav-item"><a href="/views/admin.php"><i class="fas fa-cog"></i><span> Configuración</span></a></div>
+        <div class="nav-item"><a href="identificar.php"><i class="fas fa-clock"></i><span> Asistencias</span></a></div>
+        <div class="nav-item"><a href="create_project.php"><i class="fas fa-folder-open"></i><span> Proyectos</span></a></div>
+        <div class="nav-item"><a href="create_user.php"><i class="fas fa-users"></i><span> Usuarios</span></a></div>
+        <div class="nav-item"><a href="view_data.php"><i class="fas fa-chart-line"></i><span> Reportes</span></a></div>
+        <div class="nav-item"><a href="configuration.php"><i class="fas fa-cog"></i><span> Configuración</span></a></div>
         <div class="nav-item"><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span> Salir</span></a></div>
          
         
