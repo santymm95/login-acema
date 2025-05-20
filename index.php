@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -56,24 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container">
-        <!-- Columna izquierda con información -->
-        <div class="left-column">
-            <div class="mockup-phone">
-                <div class="text-overlay">
-                    <h2 class="active">Bienvenido <br><strong>ACEMA ERP</strong></h2>
-                    <h2>Sistema adaptado a dispositivos móviles.</h2>
-                    <h2>Conexión directa, en tiempo real</h2>
-                    <h2>Datos relacionales para mayor facilidad de búsqueda.</h2>
-                    <h6>Visita nuestra web<br><a href="https://acemaingenieria.com/" target="_blank">acemaingenieria.com</a></h6>
-                </div>
-            </div>
-        </div>
-
-        <!-- Columna derecha con el login -->
-        <div class="right-column">
+        <!-- Solo el formulario centrado, sin mockup-phone -->
+        <div class="right-column" style="margin: 0 auto; float: none;">
             <div class="login-box">
                 <h2>Iniciar sesión</h2>
-
                 <!-- Mostrar mensaje de error si existe -->
                 <?php if (isset($_SESSION['error'])): ?>
                     <div class="alert error">
@@ -83,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         ?>
                     </div>
                 <?php endif; ?>
-
                 <form action="index.php" method="POST">
                     <div class="input-group">
                         <i class="fas fa-user"></i>
@@ -104,23 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
-
     <script>
-        const texts = document.querySelectorAll('.mockup-phone h2, .mockup-phone h6');
-        let currentIndex = 0;
-
-        function cycleTexts() {
-            texts[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % texts.length;
-            texts[currentIndex].classList.add('active');
-        }
-
-        setInterval(cycleTexts, 4000); // Cambio cada 4 segundos
-
         // Mostrar/ocultar contraseña
         const togglePassword = document.getElementById('toggle-password');
         const passwordField = document.getElementById('password');
-
         togglePassword.addEventListener('click', () => {
             const type = passwordField.type === 'password' ? 'text' : 'password';
             passwordField.type = type;
